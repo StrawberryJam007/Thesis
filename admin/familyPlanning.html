@@ -43,7 +43,7 @@
                 </li>
             </ul>
         </nav>
-        <aside class="main-sidebar sidebar-light-primary elevation-2" style="background-color: rgb(62,88,113);">
+        <aside class="main-sidebar sidebar-light-primary elevation-2" style="background-color: rgb(32, 116, 70);">
             <!-- Brand Logo -->
             <a href="index.html" class="brand-link animated swing">
                 <img src="../asset/img/Logo2.png" alt="Logo" width="200">
@@ -85,22 +85,10 @@
                                 </p>
                             </a>
                         </li>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="maternal-report.html" class="nav-link">
-                                    <i class="nav-icon far fa-circle"></i>
-                                    <p>Maternal Per Month</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="vaccinated-report.html" class="nav-link">
-                                    <i class="nav-icon far fa-circle"></i>
-                                    <p>Vaccinated Children</p>
-                                </a>
-                            </li>
 
 
-                        </ul>
+
+                    </ul>
                 </nav>
             </div>
         </aside>
@@ -114,7 +102,7 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Child</li>
+                                <li class="breadcrumb-item active">FP</li>
                             </ol>
                         </div>
                         <a class="btn btn-sm elevation-2" href="#" data-toggle="modal" data-target="#add"
@@ -149,9 +137,12 @@
                                     <tr>
                                         <th>First Name</th>
                                         <th>Last Name</th>
-                                        <th>Gender</th>
-                                        <th>Birthdate</th>
-                                        <th>Upload File</th>
+                                        <th>Maiden Name</th>
+                                        <th>Status</th>
+                                        <th>No. of Child</th>
+                                        <th>FP Method</th>
+                                        <th>Date</th>
+                                        <th>Remarks</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -161,17 +152,10 @@
                                         <td>Layla</td>
                                         <td>Male</td>
                                         <td>06-12-2021</td>
-                                        <td>
-                                            <form action="" method="post" class="add-product-form"
-                                                enctype="multipart/form-data">
-
-
-
-                                                <input type="file" name="p_image"
-                                                    accept="image/png, image/jpg, image/jpeg" class="box" required>
-
-                                            </form>
-                                        </td>
+                                        <td>06-12-2021</td>
+                                        <td>06-12-2021</td>
+                                        <td>06-12-2021</td>
+                                        <td>06-12-2021</td>
                                         <td class="text-right">
                                             <a class="btn btn-sm btn-success" href="#" data-toggle="modal"
                                                 data-target="#edit"><i class="fa fa-pen"></i></a>
@@ -207,6 +191,7 @@
             <div class="modal-content">
                 <div class="modal-body text-center">
                     <form>
+                        <!-- main modal for FP -->
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
@@ -227,24 +212,43 @@
                                                 <input type="text" class="form-control" placeholder="Last Name">
                                             </div>
                                         </div>
-
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Gender</label>
+                                                <label> Maiden Name</label>
+                                                <input type="text" class="form-control" placeholder="Maiden Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label> Status</label>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Have spouse / No spouse">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Type of Method</label>
                                                 <select class="form-control">
-                                                    <option>Male</option>
-                                                    <option>Female</option>
+                                                    <option>Condom</option>
+                                                    <option>Pills</option>
+                                                    <option>Intra-uterine device (IUD)</option>
+                                                    <option>Cervical mucus </option>
+                                                    <option>Others</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Birth Date</label>
+                                                <label>Date of Visit</label>
                                                 <input type="date" class="form-control">
                                             </div>
                                         </div>
-
-
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label> Remarks</label>
+                                                <input type="text" class="form-control" placeholder="Type Remarks">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -267,47 +271,73 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="card-header">
-                                        <span class="fa fa-home"> Family Planning</span>
-                                    </div>
+                                    <!-- main modal for adding-->
                                     <div class="row">
-                                        <div class="col-md-3">
+
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Full Name</label>
-                                                <input type="text" class="form-control"
-                                                    placeholder="lastname, first name, mi">
+                                                <label> First Name</label>
+                                                <input type="text" class="form-control" placeholder="First Name">
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Gender</label>
+                                                <label> Last Name</label>
+                                                <input type="text" class="form-control" placeholder="Last Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label> Maiden Name</label>
+                                                <input type="text" class="form-control" placeholder="Maiden Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label> Status</label>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Have spouse / No spouse">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Type of Method</label>
                                                 <select class="form-control">
-                                                    <option>Male</option>
-                                                    <option>Female</option>
+                                                    <option>Condom</option>
+                                                    <option>Pills</option>
+                                                    <option>Intra-uterine device (IUD)</option>
+                                                    <option>Cervical mucus </option>
+                                                    <option>Others</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Birth Date</label>
+                                                <label>Date of Visit</label>
                                                 <input type="date" class="form-control">
                                             </div>
                                         </div>
-
-
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label> Remarks</label>
+                                                <input type="text" class="form-control" placeholder="Type Remarks">
+                                            </div>
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer">
-                            <a href="#" class="btn btn-danger" data-dismiss="modal">Close</a>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </form>
                 </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <a href="#" class="btn btn-danger" data-dismiss="modal">Close</a>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+                </form>
             </div>
         </div>
+    </div>
     </div>
     <!-- jQuery -->
     <script src="../asset/jquery/jquery.min.js"></script>
