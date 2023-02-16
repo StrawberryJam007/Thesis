@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Maternity-Record-Management-System</title>
+    <!-- Tab Logo -->
+    <link rel="icon" type="image/x-icon" href="../asset/img/Logo2.ico">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../asset/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="../asset/css/adminlte.min.css">
@@ -75,7 +77,14 @@
                                 </p>
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a href="familyPlanning.html" class="nav-link">
+                                <i class="nav-icon fas fa-school"></i>
+                                <p>
+                                    Family Planing
+                                </p>
+                            </a>
+                        </li>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="maternal-report.html" class="nav-link">
@@ -100,7 +109,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0"><span class="fa fa-baby"></span> Camp One Child Records</h1>
+                            <h1 class="m-0"><span class="fa fa-school"></span> Camp One Family Planing</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -138,12 +147,11 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Mother Name</th>
-                                        <th>Child Name</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
                                         <th>Gender</th>
                                         <th>Birthdate</th>
-                                        <th>Weight</th>
-                                        <th>Height</th>
+                                        <th>Upload File</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -153,8 +161,17 @@
                                         <td>Layla</td>
                                         <td>Male</td>
                                         <td>06-12-2021</td>
-                                        <td>1.2kg</td>
-                                        <td>76cm</td>
+                                        <td>
+                                            <form action="" method="post" class="add-product-form"
+                                                enctype="multipart/form-data">
+
+
+
+                                                <input type="file" name="p_image"
+                                                    accept="image/png, image/jpg, image/jpeg" class="box" required>
+
+                                            </form>
+                                        </td>
                                         <td class="text-right">
                                             <a class="btn btn-sm btn-success" href="#" data-toggle="modal"
                                                 data-target="#edit"><i class="fa fa-pen"></i></a>
@@ -194,33 +211,23 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card-header">
-                                        <span class="fa fa-baby"> Child Information</span>
+                                        <span class="fa fa-home"> Family Planning</span>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12">
+
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Mothers Name</label>
-                                                <input type="text" class="form-control" placeholder="Mothers Name">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Child Last Name</label>
-                                                <input type="text" class="form-control" placeholder="Last Name">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Child First Name</label>
+                                                <label> First Name</label>
                                                 <input type="text" class="form-control" placeholder="First Name">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Child Middle Name</label>
-                                                <input type="text" class="form-control" placeholder="Middle Name">
+                                                <label> Last Name</label>
+                                                <input type="text" class="form-control" placeholder="Last Name">
                                             </div>
                                         </div>
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Gender</label>
@@ -236,28 +243,8 @@
                                                 <input type="date" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Weight</label>
-                                                <div class="input-group my-colorpicker2">
-                                                    <input type="text" class="form-control">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">kg</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Height</label>
-                                                <div class="input-group my-colorpicker2">
-                                                    <input type="text" class="form-control">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">cm</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -281,34 +268,17 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card-header">
-                                        <span class="fa fa-baby"> Child Information</span>
+                                        <span class="fa fa-home"> Family Planning</span>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Mothers Name</label>
-                                                <input type="text" class="form-control" placeholder="Mothers Name">
+                                                <label>Full Name</label>
+                                                <input type="text" class="form-control"
+                                                    placeholder="lastname, first name, mi">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Child Last Name</label>
-                                                <input type="text" class="form-control" placeholder="Last Name">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Child First Name</label>
-                                                <input type="text" class="form-control" placeholder="First Name">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Child Middle Name</label>
-                                                <input type="text" class="form-control" placeholder="Middle Name">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Gender</label>
                                                 <select class="form-control">
@@ -317,34 +287,14 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Birth Date</label>
                                                 <input type="date" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Weight</label>
-                                                <div class="input-group my-colorpicker2">
-                                                    <input type="text" class="form-control">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">kg</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Height</label>
-                                                <div class="input-group my-colorpicker2">
-                                                    <input type="text" class="form-control">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">cm</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
