@@ -1,3 +1,35 @@
+<?php
+
+include 'asset/config.php';
+session_start();
+
+if (isset($_POST['submit'])) {
+
+   $username = mysqli_real_escape_string($conn, $_POST['username']);
+   $password = mysqli_real_escape_string($conn, md5($_POST['password']));
+
+   $select = mysqli_query($conn, "SELECT * FROM `admin` WHERE username = '$username' AND password = '$password'") or die('query failed');
+
+   if (mysqli_num_rows($select) > 0) {
+      $row = mysqli_fetch_assoc($select);
+
+      header('location:admin/index.html');
+   } else {
+      $message[] = 'incorrect password or username!';
+   }
+}
+
+?>
+<?php
+if (isset($message)) {
+   foreach ($message as $message) {
+      echo '<div class="alert alert-danger" role="alert" onclick="this.remove();">
+      <p class="text-center">' . $message . '</p>
+   </div>';
+   }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,8 +38,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <title>Maternity-Record-Management-System</title>
    <!-- Google Font: Source Sans Pro -->
-   <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
    <!-- Font Awesome -->
    <link rel="stylesheet" href="asset/fontawesome/css/all.min.css">
    <!-- Theme style -->
@@ -17,9 +48,7 @@
 <body class="hold-transition login-page">
    <div class="login-box">
       <!-- Alert this using db -->
-      <div class="alert alert-danger" role="alert">
-         <p class="text-center">Username or Password is Invalid</p>
-      </div>
+
       <!-- /.login-logo -->
       <div class="card card-outline card-info">
          <div class="card-header text-center">
@@ -27,10 +56,11 @@
                <img src="asset/img/Logo.jpg" alt="Logo" width="200">
             </a>
          </div>
+
          <div class="card-body">
-            <form action="admin" method="post">
+            <form action="" method="post">
                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Username">
+                  <input type="text" name="username" class="form-control" placeholder="Username">
                   <div class="input-group-append">
                      <div class="input-group-text">
                         <span class="fas fa-user"></span>
@@ -38,7 +68,7 @@
                   </div>
                </div>
                <div class="input-group mb-3">
-                  <input type="password" class="form-control" placeholder="Password">
+                  <input type="password" name="password" class="form-control" placeholder="Password">
                   <div class="input-group-append">
                      <div class="input-group-text">
                         <span class="fas fa-lock"></span>
@@ -49,17 +79,17 @@
                <div class="row">
 
                   <div class="col-6 offset-3">
-                     <button type="submit" class="btn btn-block btn-bg"
-                        style="background-color: rgb(96, 228, 155);">Login</button>
+                     <button type="submit" name="submit" class="btn btn-block btn-bg" style="background-color: rgb(96, 228, 155);">Login</button>
                   </div>
                </div>
             </form>
+
+            </form>
+            <!-- /.card-body -->
          </div>
-         <!-- /.card-body -->
+         <!-- /.card -->
       </div>
-      <!-- /.card -->
-   </div>
-   <!-- /.login-box -->
+      <!-- /.login-box -->
 </body>
 
 </html>
