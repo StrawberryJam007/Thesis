@@ -11,8 +11,6 @@ if (isset($_POST['submit'])) {
    $select = mysqli_query($conn, "SELECT * FROM `admin` WHERE username = '$username' AND password = '$password'") or die('query failed');
 
    if (mysqli_num_rows($select) > 0) {
-      $row = mysqli_fetch_assoc($select);
-
       header('location:admin/index.html');
    } else {
       $message[] = 'incorrect password or username!';
@@ -37,17 +35,17 @@ if (isset($message)) {
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <title>Maternity-Record-Management-System</title>
-   <!-- Google Font: Source Sans Pro -->
+   <!-- google font-->
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-   <!-- Font Awesome -->
+   <!-- font awesome -->
    <link rel="stylesheet" href="asset/fontawesome/css/all.min.css">
-   <!-- Theme style -->
+   <!-- theme style -->
    <link rel="stylesheet" href="asset/css/adminlte.min.css">
 </head>
 
 <body class="hold-transition login-page">
    <div class="login-box">
-      <!-- Alert this using db -->
+
 
       <!-- /.login-logo -->
       <div class="card card-outline card-info">

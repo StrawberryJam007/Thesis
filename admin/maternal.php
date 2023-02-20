@@ -1,3 +1,22 @@
+<?php
+@include 'asset/config.php';
+
+if (isset($_POST['submit'])) {
+
+    $patientCode = $_POST['patientCode'];
+    $patientName = $_POST['patientName'];
+    $maternalSched = $_POST['maternalSched'];
+    $mnd = $_POST['mnd'];
+    $bp = $_POST['bp'];
+    $weight = $_POST['weight'];
+    $sot = $_POST['sot'];
+    $remarks = $_POST['remarks'];
+}
+$conn = new mysqli('localhost', 'root', '', 'thesis');
+$select = mysqli_query($conn, "INSERT INTO `maternalconcepcion` (patientCode, patientName, maternalSched, mnd, bp, weight, sot, remarks) 
+                                                        VALUES ('$patientCode', '$patientName', '$maternalSched','$mnd', '$bp', '$weight', '$sot', '$remarks')") or die('query failed');
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,8 +40,7 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-        <nav class="main-header navbar navbar-expand navbar-light elevation-1"
-            style="background-color: rgb(60, 179, 113);">
+        <nav class="main-header navbar navbar-expand navbar-light elevation-1" style="background-color: rgb(60, 179, 113);">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -54,8 +72,7 @@
             </a>
             <div class="sidebar">
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
                             <a href="index.html" class="nav-link">
                                 <i class="nav-icon fa fa-tachometer-alt"></i>
@@ -107,14 +124,10 @@
                             </ol>
 
                         </div>
-                        <a class="btn btn-sm elevation-2" href="#" data-toggle="modal" data-target="#add"
-                            style="margin-top: 20px;margin-left: 10px;background-color: rgb(60, 179, 113);"><i
-                                class="fa fa-plus"></i> Add New</a>
+                        <a class="btn btn-sm elevation-2" href="#" data-toggle="modal" data-target="#add" style="margin-top: 20px;margin-left: 10px;background-color: rgb(60, 179, 113);"><i class="fa fa-plus"></i> Add New</a>
                         <!-- dropdown menu -->
-                        <div class="dropdown show elevation-2"
-                            style="margin-top: 20px;margin-left: 10px;background-color: rgb(60, 179, 113);">
-                            <a class="btn btn-Info dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown show elevation-2" style="margin-top: 20px;margin-left: 10px;background-color: rgb(60, 179, 113);">
+                            <a class="btn btn-Info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Barangays
                             </a>
 
@@ -154,14 +167,12 @@
                                             <p class="info"><small>Weight: <b>78kg</b></small></p>
                                             <p class="info"><small>Size of tummy: <b>38</b></small></p>
                                         </td>
-                                        <td></td>
                                         <td>Raffy Tulfo</td>
+                                        <td>Done</td>
 
                                         <td class="text-right">
-                                            <a class="btn btn-sm btn-success" href="#" data-toggle="modal"
-                                                data-target="#edit"><i class="fa fa-pen"></i></a>
-                                            <a class="btn btn-sm btn-danger" href="#" data-toggle="modal"
-                                                data-target="#delete"><i class="fa fa-trash"></i></a>
+                                            <a class="btn btn-sm btn-success" href="#" data-toggle="modal" data-target="#edit"><i class="fa fa-pen"></i></a>
+                                            <a class="btn btn-sm btn-danger" href="#" data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i></a>
                                         </td>
 
                                     </tr>
@@ -191,7 +202,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-body text-center">
-                    <form>
+                    <form action="" method="post">
                         <!-- mainn modal of maternal -->
                         <div class="card-body">
                             <div class="row">
@@ -202,28 +213,33 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
+                                                <label>Patient Code</label>
+                                                <input type="text" class="form-control" placeholder="PNT-123">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
                                                 <label>Patient Name</label>
-                                                <input type="text" class="form-control" placeholder="Name">
+                                                <input type="text" name="patientName" class="form-control" placeholder="Name">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Maternal Schedule</label>
-                                                <input type="date" class="form-control">
+                                                <input type="date" name="maternalSched" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Midwife/Nurse/Doctor</label>
-                                                <input type="text" class="form-control"
-                                                    placeholder="Midwife/Nurse/Doctor">
+                                                <input type="text" name="mnd" class="form-control" placeholder="Midwife/Nurse/Doctor">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Blood Pressure</label>
                                                 <div class="input-group my-colorpicker2">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" name="bp" class="form-control">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">mmHg</span>
                                                     </div>
@@ -234,7 +250,7 @@
                                             <div class="form-group">
                                                 <label>Weight</label>
                                                 <div class="input-group my-colorpicker2">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" name="weight" class="form-control">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">kg</span>
                                                     </div>
@@ -243,14 +259,15 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Sise of Tummy</label>
-                                                <input type="number" class="form-control" placeholder="Sise of Tummy">
+                                                <label>Size of Tummy</label>
+                                                <input type="number" name="sot" class="form-control" placeholder="Sise of Tummy">
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Remarks</label>
-                                                <input type="text" class="form-control" placeholder="Remarks">
+                                                <input type="text" name="remarks" class="form-control" placeholder="Remarks">
                                             </div>
                                         </div>
                                     </div>
@@ -260,7 +277,7 @@
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <a href="#" class="btn btn-danger" data-dismiss="modal">Close</a>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="submit" name="submit" class="btn btn-primary">Save Changes</button>
                         </div>
                     </form>
                 </div>
@@ -271,44 +288,43 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-body text-center">
-                    <form>
+                    <form action="" method="post">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card-header">
-                                        <span class="fa fa-baby"> Maternal Information</span>
+                                        <span class="fa fa-child"> Maternal Information</span>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Patient Code</label>
-                                                <input type="text" class="form-control" placeholder="PNT-123">
+                                                <input type="text" name="patientCode" class="form-control" placeholder="PNT-123">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Patient Name</label>
-                                                <input type="text" class="form-control" placeholder="Name">
+                                                <input type="text" name="patientName" class="form-control" placeholder="Name">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Maternal Schedule</label>
-                                                <input type="date" class="form-control">
+                                                <input type="date" name="maternalSched" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Midwife/Nurse/Doctor</label>
-                                                <input type="text" class="form-control"
-                                                    placeholder="Midwife/Nurse/Doctor">
+                                                <input type="text" name="mnd" class="form-control" placeholder="Midwife/Nurse/Doctor">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Blood Pressure</label>
                                                 <div class="input-group my-colorpicker2">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" name="bp" class="form-control">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">mmHg</span>
                                                     </div>
@@ -319,7 +335,7 @@
                                             <div class="form-group">
                                                 <label>Weight</label>
                                                 <div class="input-group my-colorpicker2">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" name="weight" class="form-control">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">kg</span>
                                                     </div>
@@ -329,13 +345,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Sise of Tummy</label>
-                                                <input type="number" class="form-control" placeholder="Sise of Tummy">
+                                                <input type="number" name="sot" class="form-control" placeholder="Sise of Tummy">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Remarks</label>
-                                                <input type="text" class="form-control" placeholder="Remarks">
+                                                <input type="text" name="remarks" class="form-control" placeholder="Remarks">
                                             </div>
                                         </div>
                                     </div>
@@ -345,7 +361,7 @@
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <a href="#" class="btn btn-danger" data-dismiss="modal">Close</a>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" name="submit" class="btn btn-primary">Save</button>
                         </div>
                     </form>
                 </div>
@@ -362,7 +378,7 @@
     <script src="../asset/tables/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script src="../asset/tables/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
     <script>
-        $(function () {
+        $(function() {
             $("#example1").DataTable();
         });
     </script>
