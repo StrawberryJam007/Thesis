@@ -154,6 +154,7 @@ if($result){
                     <div class="card card-info elevation-2">
                         <br>
                         <!-- table -->
+                        
                         <div class="col-md-12">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
@@ -167,31 +168,51 @@ if($result){
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php
                                
+                               $sql="Select * from maternalconcepcion";
+                               $result=mysqli_query($conn,$sql);
+                               if($result){
+                              while($row=mysqli_fetch_assoc($result)){
+                                $patientCode = $row['patientCode'];
+                                $patientName = $row['patientName'];
+                                $sched = $row['sched'];
+                                $mnd = $row['mnd'];
+                                $bp = $row['bp'];
+                                $weight = $row['weight'];
+                                $sot = $row['sot'];
+                                $remarks = $row['remarks'];
+                                echo '
+                                <tr>
+                                <td>'.$patientCode.'</td>
+                                <td>
                                    
-                                    <tr>
-                                    <td>PTC-101</td>
-                                    <td>
-                                       
-                                       <p class="info">Patient Name: <b>Adie</b></p>
-                                       <p class="info"><small>Schedule: <b>10/10/2023</b></small></p>
-                                       <p class="info"><small>Blood Pressure: <b>120/30</b></small></p>
-                                       <p class="info"><small>Weight: <b>55kg</b></small></p>
-                                       <p class="info"><small>Size of tummy: <b>15</b></small></p>
-                                      
-                                   </td>
-                               <!-- mid wife/nurse/dr column -->
-                               <td>Raffy Tulfo</td>
-        
-                                <!-- remakrs column -->
-                                <td>Done</td>
-                                 <!-- action column -->
+                                   <p class="info">Patient Name: <b>'.$patientName.'</b></p>
+                                   <p class="info"><small>Schedule: <b>'.$sched.'</b></small></p>
+                                   <p class="info"><small>Blood Pressure: <b>'.$bp.'</b></small></p>
+                                   <p class="info"><small>Weight: <b>'.$weight.'</b></small></p>
+                                   <p class="info"><small>Size of tummy: <b>'.$sot.'</b></small></p>
+                                  
+                               </td>
+                           <!-- mid wife/nurse/dr column -->
+                           <td>'.$mnd.'</td>
+    
+                            <!-- remakrs column -->
+                            <td>'.$remarks.'</td>
+                            <!-- action column -->
                                 <td class="text-right">
                                  <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#edit"><i class="fa fa-pen"></i></a>
                                     <a class="btn btn-sm btn-danger" href="#" data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i></a>
                                     </td>
                                 
                                     </tr>
+                                ';
+                              }
+                              
+                               }
+                               ?>
+                                   
+                                 
                                 </tbody>
                             </table>
                         </div>
