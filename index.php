@@ -1,6 +1,6 @@
 <?php
 
-include 'asset/config.php';
+include 'admin/connect.php';
 session_start();
 
 if (isset($_POST['submit'])) {
@@ -11,13 +11,15 @@ if (isset($_POST['submit'])) {
    $select = mysqli_query($conn, "SELECT * FROM `admin` WHERE username = '$username' AND password = '$password'") or die('query failed');
 
    if (mysqli_num_rows($select) > 0) {
+      $row = mysqli_fetch_assoc($select);
+      $_SESSION['adminId'] = $row['adminId'];
       header('location:admin/index.html');
    } else {
       $message[] = 'incorrect password or username!';
    }
 }
-
 ?>
+<!-- toggle alert pag mali -->
 <?php
 if (isset($message)) {
    foreach ($message as $message) {
@@ -27,7 +29,6 @@ if (isset($message)) {
    }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 

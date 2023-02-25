@@ -1,21 +1,27 @@
 <?php
-@include 'asset/config.php';
+include 'connect.php';
 
-if (isset($_POST['submit'])) {
 
+if(isset($_POST['submit'])) {
+    
     $patientCode = $_POST['patientCode'];
     $patientName = $_POST['patientName'];
-    $maternalSched = $_POST['maternalSched'];
+    $sched = $_POST['sched'];
     $mnd = $_POST['mnd'];
     $bp = $_POST['bp'];
     $weight = $_POST['weight'];
     $sot = $_POST['sot'];
     $remarks = $_POST['remarks'];
-}
-$conn = new mysqli('localhost', 'root', '', 'thesis');
-$select = mysqli_query($conn, "INSERT INTO `maternalconcepcion` (patientCode, patientName, maternalSched, mnd, bp, weight, sot, remarks) 
-                                                        VALUES ('$patientCode', '$patientName', '$maternalSched','$mnd', '$bp', '$weight', '$sot', '$remarks')") or die('query failed');
 
+
+$sql= "INSERT INTO maternalconcepcion(patientCode,patientName,sched,mnd,bp,weight,sot,remarks) VALUES ('$patientCode','$patientName','$sched','$mnd','$bp','$weight',$sot,'$remarks')";
+$result=mysqli_query($conn,$sql);
+if($result){
+    echo "";
+}else{
+    die(mysqli_error($conn));
+}
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,7 +89,7 @@ $select = mysqli_query($conn, "INSERT INTO `maternalconcepcion` (patientCode, pa
                         </li>
 
                         <li class="nav-item">
-                            <a href="maternal.html" class="nav-link">
+                            <a href="maternal.php" class="nav-link">
                                 <i class="nav-icon fa fa-child"></i>
                                 <p>
                                     Maternal Records
@@ -144,13 +150,16 @@ $select = mysqli_query($conn, "INSERT INTO `maternalconcepcion` (patientCode, pa
             </div>
             <section class="content">
                 <div class="container-fluid">
+                    
                     <div class="card card-info elevation-2">
                         <br>
+                        <!-- table -->
                         <div class="col-md-12">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
+                                    <!-- patient info column -->
                                     <tr>
-
+                                        <th>Patient Code</th>
                                         <th>Patient Info</th>
                                         <th>Midwife/Nurse/Doctor</th>
                                         <th>Remarks</th>
@@ -158,23 +167,30 @@ $select = mysqli_query($conn, "INSERT INTO `maternalconcepcion` (patientCode, pa
                                     </tr>
                                 </thead>
                                 <tbody>
+                               
+                                   
                                     <tr>
-
-                                        <td>
-                                            <p class="info">Patient Name: <b>Sofia The First</b></p>
-                                            <p class="info"><small>Schedule: <b>06-12-2021</b></small></p>
-                                            <p class="info"><small>Blood Pressure: <b>80/110</b></small></p>
-                                            <p class="info"><small>Weight: <b>78kg</b></small></p>
-                                            <p class="info"><small>Size of tummy: <b>38</b></small></p>
-                                        </td>
-                                        <td>Raffy Tulfo</td>
-                                        <td>Done</td>
-
-                                        <td class="text-right">
-                                            <a class="btn btn-sm btn-success" href="#" data-toggle="modal" data-target="#edit"><i class="fa fa-pen"></i></a>
-                                            <a class="btn btn-sm btn-danger" href="#" data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i></a>
-                                        </td>
-
+                                    <td>PTC-101</td>
+                                    <td>
+                                       
+                                       <p class="info">Patient Name: <b>Adie</b></p>
+                                       <p class="info"><small>Schedule: <b>10/10/2023</b></small></p>
+                                       <p class="info"><small>Blood Pressure: <b>120/30</b></small></p>
+                                       <p class="info"><small>Weight: <b>55kg</b></small></p>
+                                       <p class="info"><small>Size of tummy: <b>15</b></small></p>
+                                      
+                                   </td>
+                               <!-- mid wife/nurse/dr column -->
+                               <td>Raffy Tulfo</td>
+        
+                                <!-- remakrs column -->
+                                <td>Done</td>
+                                 <!-- action column -->
+                                <td class="text-right">
+                                 <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#edit"><i class="fa fa-pen"></i></a>
+                                    <a class="btn btn-sm btn-danger" href="#" data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                
                                     </tr>
                                 </tbody>
                             </table>
@@ -198,92 +214,104 @@ $select = mysqli_query($conn, "INSERT INTO `maternalconcepcion` (patientCode, pa
             </div>
         </div>
     </div>
+    <!-- mainn modal edit of maternal -->
+  
+   
     <div id="edit" class="modal animated rubberBand delete-modal" role="dialog">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <form action="" method="post">
-                        <!-- mainn modal of maternal -->
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card-header">
-                                        <span class="fa fa-child"> Maternal Information</span>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Patient Code</label>
-                                                <input type="text" class="form-control" placeholder="PNT-123">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Patient Name</label>
-                                                <input type="text" name="patientName" class="form-control" placeholder="Name">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Maternal Schedule</label>
-                                                <input type="date" name="maternalSched" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Midwife/Nurse/Doctor</label>
-                                                <input type="text" name="mnd" class="form-control" placeholder="Midwife/Nurse/Doctor">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Blood Pressure</label>
-                                                <div class="input-group my-colorpicker2">
-                                                    <input type="text" name="bp" class="form-control">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">mmHg</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Weight</label>
-                                                <div class="input-group my-colorpicker2">
-                                                    <input type="text" name="weight" class="form-control">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">kg</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Size of Tummy</label>
-                                                <input type="number" name="sot" class="form-control" placeholder="Sise of Tummy">
-                                            </div>
-                                        </div>
+    
+    
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+    
+         <div class="modal-content">
+             <div class="modal-body text-center">
+                 <form action="update_query.php" method="POST">
+                     
+                     <div class="card-body">
+                        
+                         <div class="row">
+                             <div class="col-md-12">
+                                 <div class="card-header">
+                                     <span class="fa fa-child"> Maternal Information</span>
+                                 </div>
+                                 <div class="row">
+                                     <div class="col-md-6">
+                                         <div class="form-group">
+                                             <label for="patientCode">Patient Code</label>
+                                             <input type="text" class="form-control" placeholder="PTC-111">
+                                         </div>
+                                     </div>
+                                     <div class="col-md-6">
+                                         <div class="form-group">
+                                             <label>Patient Name</label>
+                                             <input type="text" name="patientName" class="form-control" placeholder="Name">
+                                         </div>
+                                     </div>
+                                     <div class="col-md-6">
+                                         <div class="form-group">
+                                             <label>Maternal Schedule</label>
+                                             <input type="date" name="maternalSched" class="form-control" placeholder="Sched">
+                                         </div>
+                                     </div>
+                                     <div class="col-md-6">
+                                         <div class="form-group">
+                                             <label>Midwife/Nurse/Doctor</label>
+                                             <input type="text" name="mnd" class="form-control" placeholder="Name">
+                                         </div>
+                                     </div>
+                                     <div class="col-md-6">
+                                         <div class="form-group">
+                                             <label>Blood Pressure</label>
+                                             <div class="input-group my-colorpicker2">
+                                                 <input type="text" name="bp" class="form-control" placeholder="120/80">
+                                                 <div class="input-group-append">
+                                                     <span class="input-group-text">mmHg</span>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="col-md-6">
+                                         <div class="form-group">
+                                             <label>Weight</label>
+                                             <div class="input-group my-colorpicker2">
+                                                 <input type="text" name="weight" class="form-control" placeholder="KG">
+                                                 <div class="input-group-append">
+                                                     <span class="input-group-text">kg</span>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="col-md-6">
+                                         <div class="form-group">
+                                             <label>Size of Tummy</label>
+                                             <input type="number" name="sot" class="form-control" placeholder="tummy size">
+                                         </div>
+                                     </div>
 
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Remarks</label>
-                                                <input type="text" name="remarks" class="form-control" placeholder="Remarks">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer">
-                            <a href="#" class="btn btn-danger" data-dismiss="modal">Close</a>
-                            <button type="submit" name="submit" class="btn btn-primary">Save Changes</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+                                     <div class="col-md-6">
+                                         <div class="form-group">
+                                             <label>Remarks</label>
+                                             <input type="text" name="remarks" class="form-control" placeholder="remarks">
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                                
+                     </div>
+                     <!-- /.card-body -->
+                     <div class="card-footer">
+                         <a href="#" class="btn btn-danger" data-dismiss="modal">Close</a>
+                         <button type="submit" name="update" class="btn btn-primary">Save Changes</button>
+                     </div>
+                 </form>
+                 
+             </div>
+         </div>
+     </div>
+       
     </div>
+        <!-- add modal -->
+       
     <div id="add" class="modal animated rubberBand delete-modal" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -299,32 +327,32 @@ $select = mysqli_query($conn, "INSERT INTO `maternalconcepcion` (patientCode, pa
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Patient Code</label>
-                                                <input type="text" name="patientCode" class="form-control" placeholder="PNT-123">
+                                                <input type="text" name="patientCode" class="form-control" placeholder="PNT-123" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Patient Name</label>
-                                                <input type="text" name="patientName" class="form-control" placeholder="Name">
+                                                <input type="text" name="patientName" class="form-control" placeholder="Name" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Maternal Schedule</label>
-                                                <input type="date" name="maternalSched" class="form-control">
+                                                <input type="date" name="sched" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Midwife/Nurse/Doctor</label>
-                                                <input type="text" name="mnd" class="form-control" placeholder="Midwife/Nurse/Doctor">
+                                                <input type="text" name="mnd" class="form-control" placeholder="Midwife/Nurse/Doctor" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Blood Pressure</label>
                                                 <div class="input-group my-colorpicker2">
-                                                    <input type="text" name="bp" class="form-control">
+                                                    <input type="text" name="bp" class="form-control" placeholder="120/80" required>
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">mmHg</span>
                                                     </div>
@@ -335,7 +363,7 @@ $select = mysqli_query($conn, "INSERT INTO `maternalconcepcion` (patientCode, pa
                                             <div class="form-group">
                                                 <label>Weight</label>
                                                 <div class="input-group my-colorpicker2">
-                                                    <input type="text" name="weight" class="form-control">
+                                                    <input type="text" name="weight" class="form-control" required>
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">kg</span>
                                                     </div>
@@ -345,13 +373,13 @@ $select = mysqli_query($conn, "INSERT INTO `maternalconcepcion` (patientCode, pa
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Sise of Tummy</label>
-                                                <input type="number" name="sot" class="form-control" placeholder="Sise of Tummy">
+                                                <input type="number" name="sot" class="form-control" placeholder="Size of Tummy" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Remarks</label>
-                                                <input type="text" name="remarks" class="form-control" placeholder="Remarks">
+                                                <input type="text" name="remarks" class="form-control" placeholder="Remarks" required>
                                             </div>
                                         </div>
                                     </div>
