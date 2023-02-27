@@ -4,6 +4,7 @@ include 'connect.php';
 
 if(isset($_POST['submit'])) {
     
+    $mconcepcionId  = $_POST['mconcepcionId'];
     $patientCode = $_POST['patientCode'];
     $patientName = $_POST['patientName'];
     $sched = $_POST['sched'];
@@ -22,7 +23,10 @@ if($result){
     die(mysqli_error($conn));
 }
 }
+
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -158,8 +162,9 @@ if($result){
                         <div class="col-md-12">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
-                                    <!-- patient info column -->
+                                    <!-- maternal info column -->
                                     <tr>
+                                        <th></th>
                                         <th>Patient Code</th>
                                         <th>Patient Info</th>
                                         <th>Midwife/Nurse/Doctor</th>
@@ -174,6 +179,7 @@ if($result){
                                $result=mysqli_query($conn,$sql);
                                if($result){
                               while($row=mysqli_fetch_assoc($result)){
+                                $mconcepcionId  = $row['mconcepcionId'];
                                 $patientCode = $row['patientCode'];
                                 $patientName = $row['patientName'];
                                 $sched = $row['sched'];
@@ -184,6 +190,7 @@ if($result){
                                 $remarks = $row['remarks'];
                                 echo '
                                 <tr>
+                                <td>'.$mconcepcionId .'</td>
                                 <td>'.$patientCode.'</td>
                                 <td>
                                    
@@ -202,7 +209,7 @@ if($result){
                             <!-- action column -->
                                 <td class="text-right">
                                  <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#edit"><i class="fa fa-pen"></i></a>
-                                    <a class="btn btn-sm btn-danger" href="#" data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i></a>
+                                    <a class="btn btn-sm btn-danger" href="delete.php?deleteId='.$mconcepcionId.'"><i class="fa fa-trash"></i></a>
                                     </td>
                                 
                                     </tr>
@@ -221,6 +228,8 @@ if($result){
             </section>
         </div>
     </div>
+    <!-- modal delete -->
+    
     <div id="delete" class="modal animated rubberBand delete-modal" role="dialog">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -229,12 +238,13 @@ if($result){
                     <h3>Are you sure want to delete this Maternal Record?</h3>
                     <div class="m-t-20">
                         <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" name="delete" class="btn btn-danger">Delete</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
     <!-- mainn modal edit of maternal -->
   
    
@@ -417,6 +427,7 @@ if($result){
             </div>
         </div>
     </div>
+    
     <!-- jQuery -->
     <script src="../asset/jquery/jquery.min.js"></script>
     <script src="../asset/js/bootstrap.bundle.min.js"></script>
